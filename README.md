@@ -1,6 +1,6 @@
 # jats_refactoring
 Scripts used to refactor JATS xml file generated with Sciflow, especially with the references.
-The script are intended to 
+The script are intended to _documentation wip_
 
 #### _refactor.xslt_
 - add label to all references
