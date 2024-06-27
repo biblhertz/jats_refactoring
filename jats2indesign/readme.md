@@ -14,15 +14,19 @@ With the `combine.py` script, you now have a complete workflow for processing a 
 ## Single steps:
 
 ### Step 1: Process JATS Article
-First, use `article2indesign.py` to process the JATS article. This script applies an XSLT transformation to the JATS XML and outputs a minified and transformed XML file ready for InDesign. The existing references are ignored.
+First, use `article2indesign.py` to process the JATS article (`jatsarticle.xml`) with the `jats2idml.xslt`. This script applies an XSLT transformation to the JATS XML and outputs a minified and transformed XML file ready for InDesign. The existing references are ignored.
 
 ``` bash
+python article2indesign.py jatsarticle.xml jats2idml.xslt
 ```
 
 ### Step 2: Convert Bibliography
-Next, run `biblio2.py` to convert the BibTeX file into an XML format via an intermediate HTML representation. This involves:
-- Converting the BibTeX file to HTML using Pandoc with a specified CSL style.
-- Applying an XSLT transformation to the HTML to produce the final XML bibliography.
+Next, run `biblio2.py` to convert the article BibTeX file (`bibliogrpahy.bib`) into an XML format via an intermediate HTML representation (`biblio_output.html`). This involves:
+- Converting the BibTeX file to HTML using Pandoc with a specified CSL style `yourcsl.csl`.
+- Applying an XSLT transformation `htmlbiblio2xml.xslt` to the HTML to produce the final XML bibliography.
+``` bash
+python biblio2.py -i bibliography.bib -o biblio_output.html -c yourcsl.csl -x htmlbiblio2xml.xslt
+```
 
 ### Step 3: Merge Article and Bibliography
 Finally, `combine.py` script helps to merge the XML outputs from Steps 1 and 2. This script will:
@@ -35,7 +39,7 @@ Finally, `combine.py` script helps to merge the XML outputs from Steps 1 and 2. 
 ### External Tools
 - **Pandoc**: A universal document converter, used in `biblio2.py` for converting BibTeX files to HTML.
   - Installation instructions can be found on the [Pandoc installation page](https://pandoc.org/installing.html).
-- **Python**: The programming language in which your scripts are written. Ensure you have Python installed to run the scripts.
+- **Python**: Ensure you have Python installed to run the scripts, and pip updated to install needed libraries.
   - Python can be downloaded from [python.org](https://www.python.org/downloads/).
 
 ### Python Libraries
@@ -43,18 +47,15 @@ Finally, `combine.py` script helps to merge the XML outputs from Steps 1 and 2. 
   - Installation command: `pip install lxml`
 - **argparse**: For parsing command-line arguments in your scripts. This is a standard library module in Python, so no additional installation should be required for Python versions 2.7 and 3.2 and above.
 - **subprocess**: For running external commands (e.g., calling other scripts or running Pandoc). This is also part of Python's standard library, so no additional installation is required.
-
-### Additional Considerations
-- Ensure that the **XSLT processor** used by `lxml` for XSLT transformations is compatible with your XSLT scripts. `lxml` typically uses `libxslt` which is compatible with XSLT 1.0 and partially compatible with XSLT 2.0 features. Your XSLT scripts should be compatible with the processor's capabilities.
-- **XML Formatter**: While not a separate dependency, your `article2indesign.py` script uses `xmlformatter`, which is not a standard library and seems to be a custom or third-party tool. The actual dependency used in your script for formatting is `lxml`, so ensure that any reference to `xmlformatter` aligns with the libraries you have installed.
-- **Operating System**: Ensure that your operating system supports these tools and libraries. The installation commands and methods may vary depending on whether you are using Windows, macOS, or Linux.
+ - **xmlformatter** for minifying and formatting XML content.
 
 ### Installation Summary
-To summarize, here are the basic installation commands you might need:
 
 ```bash
+# clone the repository
 # Install lxml
 pip install lxml
+# Install xmlformatter
 pip install xmlformatter
 
 # Install Pandoc (follow the specific instructions for your OS)
@@ -69,7 +70,7 @@ Before running this command, make sure you have pip installed and up to date. Th
 
 ### Adjusting the Dependency List
 
-Given this clarification, here's the updated list of dependencies for your project:
+
 
 - **Python Libraries:**
   - `lxml` for XML parsing and XSLT transformations.
@@ -78,8 +79,3 @@ Given this clarification, here's the updated list of dependencies for your proje
   - `subprocess` for running external commands (included with Python).
   - `xmlformatter` for minifying and formatting XML content.
     - `pip install xmlformatter`
-
-- **External Tools:**
-  - **Pandoc** for converting BibTeX files to HTML.
-    - Installation instructions can be found on the [Pandoc installation page](https://pandoc.org/installing.html).
-
