@@ -1,0 +1,3 @@
+[submodule "jats2indesign/biblhertz_csl"]
+	path = jats2indesign/biblhertz_csl
+	url = https://github.com/biblhertz/biblhertz_csl
