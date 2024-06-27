@@ -1,0 +1,1 @@
+This folder contains the scripts that were created to improve the SciFlow JATS export by the addition of missing elements in the <element-citation> references with the content of the bibtex file originally imported in Sciflow.
