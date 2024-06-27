@@ -14,7 +14,7 @@ base_name = args.article_path.rsplit('.', 1)[0]
 
 # Define paths and filenames based on input
 xslt_path = 'jats2idml.xslt'
-csl_path = 'biblhertz.csl'
+csl_path = 'biblhertz_csl/biblhertz.csl'
 html_xslt_path = 'htmlbiblio2xml.xslt'
 output_html = f'{base_name}_biblio.html'
 output_biblio_xml = f'{base_name}_biblio.xml'
