@@ -62,20 +62,3 @@ pip install xmlformatter
 ```
 
 Ensure that Python is installed and that you can run `python` or `python3` from your command line or terminal. Also, verify that Pandoc is correctly installed by running `pandoc --version`.
-
-Understood, if `xmlformatter` is essential for your workflow to achieve the desired level of compression and formatting that `lxml` doesn't provide out of the box, then it's indeed a necessary dependency. 
-
-
-Before running this command, make sure you have pip installed and up to date. This command assumes that `xmlformatter` refers to a package available in PyPI that meets your requirements for XML minification and formatting.
-
-### Adjusting the Dependency List
-
-
-
-- **Python Libraries:**
-  - `lxml` for XML parsing and XSLT transformations.
-    - `pip install lxml`
-  - `argparse` for parsing command-line arguments (included with Python).
-  - `subprocess` for running external commands (included with Python).
-  - `xmlformatter` for minifying and formatting XML content.
-    - `pip install xmlformatter`
