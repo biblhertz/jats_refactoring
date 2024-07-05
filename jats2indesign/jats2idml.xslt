@@ -5,54 +5,57 @@
     <!-- Include it all into article element -->
     <xsl:template match="/">
         <article>
-             <!-- Metadata for Abstract Page -->
-        <abstract_meta>
-            <abstract_authors>
-                <xsl:apply-templates select="/article/front/article-meta/contrib-group"/>
-            </abstract_authors><xsl:text>&#x2029;</xsl:text>
-
-            <abstract_title>
-                <xsl:value-of select="/article/front/article-meta/title-group/article-title"/>
-            </abstract_title><xsl:text>&#x2029;</xsl:text>
-
-            <abstract_keywords>
-                <xsl:text>Keywords: </xsl:text>
-                <xsl:for-each select="/article/front/article-meta/kwd-group/kwd">
-                    <xsl:if test="position() != 1">, </xsl:if>
-                    <xsl:value-of select="."/>
-                </xsl:for-each>
-            </abstract_keywords><xsl:text>&#x2029;</xsl:text>
-        </abstract_meta>
-
-        <!--Abstract story-->
-        <abstract_main>
-        <abstract>
-            <xsl:value-of select="/article/front/article-meta/abstract"/>
-        </abstract><xsl:text>&#x2029;</xsl:text>
-
-        <!-- DOI -->
-        <doi>DOI: <xsl:value-of select="/article/front/article-meta/article-id[@pub-id-type='doi']"/></doi><xsl:text>&#x2029;</xsl:text>
-        </abstract_main>
-
-        <!-- Metadata for Article first page-->
-        <article_meta>
-            <title>
-                <xsl:value-of select="/article/front/article-meta/title-group/article-title"/>
-            </title><xsl:text>&#x2029;</xsl:text>
-
-            <authors>
-                <xsl:apply-templates select="/article/front/article-meta/contrib-group"/>
-            </authors><xsl:text>&#x2029;</xsl:text>
-        </article_meta>
-
-        <!-- Body of the Article -->
-        <body>
-            <xsl:apply-templates select="/article/body"/>
-        </body>
-        <!-- Back of article with references and footnotes -->
-        <back>
-            <xsl:apply-templates select="/article/back"/>
-        </back>
+            <xsl:attribute name="doi">
+                <xsl:value-of select="/article/front/article-meta/article-id[@pub-id-type='doi']"/>
+            </xsl:attribute>
+            <!-- Metadata for Abstract Page -->
+            <abstract_meta>
+                <abstract_authors>
+                    <xsl:apply-templates select="/article/front/article-meta/contrib-group"/>
+                </abstract_authors><xsl:text>&#x2029;</xsl:text>
+                
+                <abstract_title>
+                    <xsl:value-of select="/article/front/article-meta/title-group/article-title"/>
+                </abstract_title><xsl:text>&#x2029;</xsl:text>
+                
+                <abstract_keywords>
+                    <xsl:text>Keywords: </xsl:text>
+                    <xsl:for-each select="/article/front/article-meta/kwd-group/kwd">
+                        <xsl:if test="position() != 1">, </xsl:if>
+                        <xsl:value-of select="."/>
+                    </xsl:for-each>
+                </abstract_keywords><xsl:text>&#x2029;</xsl:text>
+            </abstract_meta>
+            
+            <!--Abstract story-->
+            <abstract_main>
+                <abstract>
+                    <xsl:value-of select="/article/front/article-meta/abstract"/>
+                </abstract><xsl:text>&#x2029;</xsl:text>
+                
+                <!-- DOI -->
+                <doi>DOI: <xsl:value-of select="/article/front/article-meta/article-id[@pub-id-type='doi']"/></doi><xsl:text>&#x2029;</xsl:text>
+            </abstract_main>
+            
+            <!-- Metadata for Article first page-->
+            <article_meta>
+                <title>
+                    <xsl:value-of select="/article/front/article-meta/title-group/article-title"/>
+                </title><xsl:text>&#x2029;</xsl:text>
+                
+                <authors>
+                    <xsl:apply-templates select="/article/front/article-meta/contrib-group"/>
+                </authors><xsl:text>&#x2029;</xsl:text>
+            </article_meta>
+            
+            <!-- Body of the Article -->
+            <body>
+                <xsl:apply-templates select="/article/body"/>
+            </body>
+            <!-- Back of article with references and footnotes -->
+            <back>
+                <xsl:apply-templates select="/article/back"/>
+            </back>
         </article>
     </xsl:template>
     
@@ -75,9 +78,9 @@
     
     <!-- Template for contrib-group -->
     <xsl:template match="contrib-group">
-     
-            <xsl:apply-templates select="contrib[@contrib-type='author']"/>
-    
+        
+        <xsl:apply-templates select="contrib[@contrib-type='author']"/>
+        
     </xsl:template>
     
     <!-- Template for author -->
@@ -92,10 +95,10 @@
                 <xsl:text>, </xsl:text>
             </xsl:if>
         </xsl:if>
-       
-            <xsl:value-of select="name/given-names"/>
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="name/surname"/>
+        
+        <xsl:value-of select="name/given-names"/>
+        <xsl:text> </xsl:text>
+        <xsl:value-of select="name/surname"/>
         
     </xsl:template>
     <xsl:template match="kwd-group/kwd">
@@ -105,9 +108,9 @@
         <xsl:value-of select="."/>
     </xsl:template>
     
-      
+    
     <xsl:template match="article-meta">
-     <abstract_meta>
+        <abstract_meta>
             <!-- Apply templates to authors within contrib-group -->
             <abstract_authors>
                 <xsl:apply-templates/>
@@ -127,7 +130,7 @@
             </abstract_keywords>
         </abstract_meta>
         <article_meta>
-        <!-- Apply templates to the article title -->
+            <!-- Apply templates to the article title -->
             <title>
                 <xsl:apply-templates/>
             </title>
@@ -167,21 +170,21 @@
         </p>
         <xsl:text>&#x2029;</xsl:text>
     </xsl:template>
-
-    <!-- Template to match the citations in artcile sections -->
+    
+    <!-- Template to match the citations in article sections -->
     <xsl:template match="sec/disp-quote/p">
         <cite>
             <xsl:apply-templates/>
         </cite>
         <xsl:text>&#x2029;</xsl:text>
     </xsl:template>
-
+    
     <!-- Template for xref elements with ref-type="fn" -->
     <xsl:template match="xref[@ref-type='fn']">
         <fnn><xsl:value-of select="."/></fnn>
     </xsl:template>
-
-         
+    
+    
     <!-- Inline style matching -->
     <xsl:template match="italic">
         <i><xsl:apply-templates/></i>
@@ -190,12 +193,59 @@
         <b><xsl:apply-templates/></b>
     </xsl:template>
     <!-- Add other inline styles as needed -->
-
-     <!-- Figure matching -->
-       <xsl:template match="fig[@fig-type='content-image']">
+    
+    <!-- Figure matching -->
+    <xsl:template match="fig[@fig-type='content-image']">
         <figure><fig_title><fig_number><xsl:value-of select="label"/></fig_number><xsl:text> </xsl:text><xsl:apply-templates select="caption/title"/></fig_title><xsl:text>&#x2029;</xsl:text><fig_note><xsl:apply-templates select="caption/p"/></fig_note><xsl:text>&#x2029;</xsl:text></figure>
     </xsl:template>
-
+    <!-- Tables matching -->
+    <xsl:template match="table-wrap">
+        <table>
+            <!-- Optional: Process table caption -->
+            <caption>
+                <xsl:apply-templates select="caption"/>
+            </caption>
+            <!-- Process the table itself -->
+            <xsl:apply-templates select="table"/>
+        </table>
+         <xsl:text>&#x2029;</xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="table">
+        <xsl:apply-templates select="thead"/>
+        <xsl:apply-templates select="tbody"/>
+    </xsl:template>
+    
+    <xsl:template match="thead">
+        <thead>
+            <xsl:apply-templates select="tr"/>
+        </thead>
+    </xsl:template>
+    
+    <xsl:template match="tbody">
+        <tbody>
+            <xsl:apply-templates select="tr"/>
+        </tbody>
+    </xsl:template>
+    
+    <xsl:template match="tr">
+        <tr>
+            <xsl:apply-templates select="th|td"/>
+        </tr>
+    </xsl:template>
+    
+    <xsl:template match="th">
+        <th>
+            <xsl:apply-templates/>
+        </th>
+    </xsl:template>
+    
+    <xsl:template match="td">
+        <td>
+            <xsl:apply-templates/>
+        </td>
+    </xsl:template>
+    
     <!-- Footnote matching -->
     <!-- Footnote group matching -->
     <xsl:template match="fn-group[@content-type='footnotes']">
