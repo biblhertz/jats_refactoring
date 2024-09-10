@@ -19,11 +19,13 @@
                 </abstract_title><xsl:text>&#x2029;</xsl:text>
                 
                 <abstract_keywords>
-                    <xsl:text>Keywords: </xsl:text>
+                    <xsl:text>keywords – </xsl:text>
+                    <italic>
                     <xsl:for-each select="/article/front/article-meta/kwd-group/kwd">
                         <xsl:if test="position() != 1">, </xsl:if>
                         <xsl:value-of select="."/>
                     </xsl:for-each>
+                    </italic>
                 </abstract_keywords><xsl:text>&#x2029;</xsl:text>
             </abstract_meta>
             
