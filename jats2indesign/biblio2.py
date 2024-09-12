@@ -25,8 +25,13 @@ pandoc_command = [
 # Prepare the stdin for the pandoc command
 pandoc_stdin = "---\ntitle: 'References:'\nnocite: '@*'\n---\n"
 
-# Run the pandoc command
-subprocess.run(pandoc_command, input=pandoc_stdin, text=True)
+# Run the pandoc command and capture errors
+result = subprocess.run(pandoc_command, input=pandoc_stdin, text=True, capture_output=True)
+if result.returncode != 0:
+    print(f"Error running pandoc command: {' '.join(pandoc_command)}")
+    print(f"Return code: {result.returncode}")
+    print(f"Output: {result.stdout}")
+    print(f"Error: {result.stderr}")
 
 # Read XSLT Transformation File
 with open(args.xslt, 'r') as xslt_file:
