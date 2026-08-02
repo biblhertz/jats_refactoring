@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -n \"README\\\\|__file__\\\\|os.path.dirname\\\\|\\\\.\\\\./\\\\|\\\\./\" \"jats+csl_json/refactor_v2.py\")",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('jats+csl_json/refactor_v2.py', encoding='utf-8'\\).read\\(\\)\\)\")"
+    ]
+  }
+}

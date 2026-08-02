@@ -1,19 +1,20 @@
 # jats_refactoring
-Scripts used to refactor JATS xml file generated with Sciflow, especially with the references.
-The script are intended to _documentation wip_
 
-#### _refactor.xslt_
-- add label to all references
-- reorder references according to labels
-- correct wrong "article-title" attributions
-- add missing "webpage" if origin is "@misc"
+Scripts for Bibliotheca Hertziana's JATS publication pipeline: repairing Sciflow's JATS
+exports against the Zotero bibliography, and preparing JATS articles/bibliographies for
+InDesign.
 
-##### _add_all.py_ 
-- include editors combining JATS with the original BibTeX files
-- include pages
-- include url when DOI is missing
+## What's here
 
-The scripts were created with the support of ChatGPT.
-## Prerequisites
-- JATS file and BIB file where references id are identical, except for a . in the BIB (i.e. BIB=author.2024 , JATS=author2024)
-- 
+| Folder | What it does |
+|---|---|
+| [`jats+csl_json`](./jats+csl_json) | **Current.** `refactor_v2.py` fixes Sciflow's JATS ref-list against a Zotero **Better CSL JSON** export — reclassifies titles, rebuilds labels, injects dropped editors, flags duplicates/dangling xrefs/mismatches for human review. Start here. |
+| [`jats2indesign`](./jats2indesign) | Separate pipeline: converts a JATS article plus a BibTeX bibliography into InDesign-ready XML (via an intermediate HTML/XSLT step), for final layout. Not part of the ref-list repair workflow above. |
+
+An earlier BibTeX-based iteration of the ref-list repair tool (`jats+bibtex`) was retired on
+the `v2` branch — fully superseded by `jats+csl_json`. It's still recoverable from git
+history (`main` branch / earlier commits) if ever needed for reference.
+
+## License
+
+MIT — see [`LICENSE`](./LICENSE).
