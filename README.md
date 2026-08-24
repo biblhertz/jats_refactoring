@@ -15,6 +15,10 @@ An earlier BibTeX-based iteration of the ref-list repair tool (`jats+bibtex`) wa
 the `v2` branch — fully superseded by `jats+csl_json`. It's still recoverable from git
 history (`main` branch / earlier commits) if ever needed for reference.
 
+## Funding
+
+Development of these tools was made possible by a grant from the Deutsche Forschungsgemeinschaft (DFG) — Project number [501142032](https://gepris.dfg.de/gepris/projekt/501142032).
+
 ## License
 
 MIT — see [`LICENSE`](./LICENSE).
